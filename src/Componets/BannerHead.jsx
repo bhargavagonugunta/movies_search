@@ -6,19 +6,17 @@ const BannerHead = ()=>{
    
 
     return(
-            <div>
-                <div className="w-[120px] mt-4 ">
-                  <div className="">                            
-                    <ul className="bg-gray-200  rounded-lg text-left " >
-                    <li className="m-2"><a href="#">Horror</a></li>
-                        <li className="m-2"><a href="#">Romance</a></li>
-                        <li className="m-2"><a href="#">Thrillr</a></li>
-                        <li className="m-2"><a href="#">Action</a></li>
-                        <li className="m-2"><a href="#">Adventure</a></li>
-                        <li className="m-2 mb-4"><a href="#">Comedy</a></li>
+            <div className="w-[130px] mt-5 bg-pink-200  rounded-lg text-left  "   >                      
+                    <ul className="w-[130px] mb-3 " >
+                    <li className="pl-2 hover:bg-pink-600 mb-2 rounded-lg "><a href="#"> Horror</a></li>
+                        <li className="pl-2 hover:bg-pink-600 mb-2 rounded-lg "><a href="#">Romance</a></li>
+                        <li className="pl-2 hover:bg-pink-600 mb-2 rounded-lg "><a href="#">Thrillr</a></li>
+                        <li className="pl-2 hover:bg-pink-600 mb-2 rounded-lg "><a href="#">Action</a></li>
+                        <li className="pl-2 hover:bg-pink-600 mb-2 rounded-lg "><a href="#">Adventure</a></li>
+                        <li className="pl-2 hover:bg-pink-600 mb-2 rounded-lg "><a href="#">Comedy</a></li>
                     </ul>
-                    </div>
-                </div>
+                
+    
             </div>
     )
 }
