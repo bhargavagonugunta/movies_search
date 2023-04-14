@@ -12,7 +12,7 @@ const Headders = ()=>{
     }
 
     return(
-        <div className="h-[70px] bg-gray-200  flex  ">
+        <div className="h-[70px] bg-gray-200  flex fixed top-0 w-[100%] z-[999]">
             <h1 className=" m-4 text-2xl shadow-slate-500  w-[250px] ">Movies Search</h1>
             <div className="w-[100%] flex-wrap">
             <ul className=" ml-auto pt-6 flex justify-end ">

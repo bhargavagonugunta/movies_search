@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Headders from './Componets/Headder';
+import Search from './Componets/Search';
+import Result from './Componets/Result';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Headders />
+    <Search />
   </React.StrictMode>
 );
 
