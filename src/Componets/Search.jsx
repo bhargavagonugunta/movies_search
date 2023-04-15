@@ -21,7 +21,7 @@ const Search = () => {
   console.log(results);
   return (
     <>
-      <div className="h-[200px] w-[100%]  bg-blue-200 ml-[30px] rounded-lg mt-[100px]">
+      <div className="h-[100px] w-[100%]  bg-blue-200 ml-[30px] rounded-lg mt-[100px]">
         <label htmlFor="searchInput" className="mr-6 ml-2">
           Movie Search :
         </label>
@@ -51,7 +51,7 @@ const Search = () => {
       </div>
       <div className="flex flex-wrap">
         {results?.map(function (result) {
-            return <Result key={result?.index} result={result} />;
+          return <Result key={result?.index} result={result} />;
         })}
       </div>
     </>
