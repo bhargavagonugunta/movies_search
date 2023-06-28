@@ -1,13 +1,27 @@
 import { useState } from "react";
-import { Handlelogin } from "./Handlelogin";
 import Result from "./Result";
+import Search from "./Search";
+import axios from "axios";
+import { Link, useNavigate, Route } from "react-router-dom";
+export var setlog = false;
 const Login = () => {
   const [username, setusername] = useState(" ");
   const [password, setpassword] = useState(" ");
   const [islogin, setislogin] = useState(false);
-  if (islogin) {
-    return <Result />;
-  }
+
+  const login = async (email, password, setislogin) => {
+    try {
+      const response = await axios.post("http://localhost:3005/api/login", {
+        email,
+        password,
+      });
+      const result = await response.data;
+      console.log("Result is", result);
+      setlog = true;
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="w-full h-screen bg-gradient-to-t flex justify-center items-center from-cyan-900 to-sky-200 ">
       <div>
@@ -43,10 +57,10 @@ const Login = () => {
           <label className="ml-3 mt-4" htmlFor="term">
             Aggre Terms and Conditions{" "}
           </label>
-          <br />
+          <br />{" "}
           <button
             className="mt-6 ml-[250px] bg-green-400  w-[100px]  h-8 rounded-lg "
-            onClick={() => Handlelogin(username, password, setislogin)}
+            onClick={() => login(username, password, setislogin)}
           >
             Login
           </button>
