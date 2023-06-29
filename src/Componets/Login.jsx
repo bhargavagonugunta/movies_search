@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Result from "./Result";
 import Search from "./Search";
 import axios from "axios";
@@ -7,9 +7,8 @@ export var setlog = false;
 const Login = () => {
   const [username, setusername] = useState(" ");
   const [password, setpassword] = useState(" ");
-  const [islogin, setislogin] = useState(false);
 
-  const login = async (email, password, setislogin) => {
+  const login = async (email, password) => {
     try {
       const response = await axios.post("http://localhost:3005/api/login", {
         email,
@@ -60,7 +59,7 @@ const Login = () => {
           <br />{" "}
           <button
             className="mt-6 ml-[250px] bg-green-400  w-[100px]  h-8 rounded-lg "
-            onClick={() => login(username, password, setislogin)}
+            onClick={() => login(username, password)}
           >
             Login
           </button>

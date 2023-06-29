@@ -21,7 +21,6 @@ const Applayout = () => {
   const navigate = useNavigate();
   const [islogin, setislogin] = useState(false);
   useEffect(() => {
-    setislogin(setlog);
     if (!islogin) {
       navigate("/Login");
       console.log("login handler");
