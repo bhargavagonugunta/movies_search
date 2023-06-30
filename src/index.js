@@ -17,10 +17,11 @@ import Login from "./Componets/Login";
 import Chat from "./Componets/Chat";
 import loginContext from "./Componets/loginContext";
 import Simmer from "./Componets/Simmer";
+import Signup from "./Componets/Signup";
 
 const Applayout = () => {
   const navigate = useNavigate();
-  const [islogin, setislogin] = useState(false);
+  const [islogin, setislogin] = useState(true);
   const setlogin = useContext(loginContext);
   if (setlogin.loginstate === true) {
     setislogin(true);
@@ -61,6 +62,10 @@ const Rout = createBrowserRouter([
   {
     path: "/Simmer",
     element: <Simmer />,
+  },
+  {
+    path: "/Signup",
+    element: <Signup />,
   },
 ]);
 //console.log(typeof Rout)

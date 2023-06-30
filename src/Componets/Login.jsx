@@ -16,20 +16,22 @@ const Login = () => {
     setval(true);
   }, [username, password]);
   const login = async () => {
-    setval(false);
     try {
       const response = await axios.post("http://localhost:3005/api/login", {
         username,
         password,
       });
       const result = await response.data;
-      if (response?.status === "200") {
+      const stat = typeof response.status;
+      console.log(stat);
+      if (response.status !== 200) {
+        setval(false);
+      } else {
         serlogin.loginstate = true;
         console.log("Result is", result);
-      } else {
-        setval(false);
       }
     } catch (err) {
+      setval(false);
       console.log(err);
     }
   };
@@ -65,13 +67,12 @@ const Login = () => {
           <br />
           <input
             id="draft"
-            class="peer/draft mt-[20px] ml-6 "
-            type="radio"
+            className="peer/draft mt-[20px] ml-6 "
+            type="checkbox"
             name="status"
-            checked
           />
-          <label for="draft" class="peer-checked/draft:text-sky-500">
-            Terams and Conditions
+          <label className="peer-checked/draft:text-sky-500">
+            Tearms and Conditions
           </label>
           <br />{" "}
           <button

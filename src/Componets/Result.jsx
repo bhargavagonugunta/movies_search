@@ -9,7 +9,7 @@ const Result = (props) => {
         <img className="w-[200px] rounded-lg" src={result?.Poster} />
         <div className="ml-6">
           <h3 className="mb-10 mt-2"> Name: {result?.Title}</h3>
-          <p className="mb-10 mt-2" >Type:{result?.Type}</p>
+          <p className="mb-10 mt-2">Type:{result?.Type}</p>
           <p>Year Of Relese:{result?.Year}</p>
           <p>{result?.imdbId}</p>
         </div>
