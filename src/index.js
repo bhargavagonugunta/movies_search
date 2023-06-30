@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -7,7 +7,6 @@ import Headders from "./Componets/Headder";
 import Search from "./Componets/Search";
 import Result from "./Componets/Result";
 import { useEffect, useState } from "react";
-import { setlog } from "./Componets/Login";
 import {
   createBrowserRouter,
   Outlet,
@@ -16,16 +15,22 @@ import {
 } from "react-router-dom";
 import Login from "./Componets/Login";
 import Chat from "./Componets/Chat";
+import loginContext from "./Componets/loginContext";
+import Simmer from "./Componets/Simmer";
 
 const Applayout = () => {
   const navigate = useNavigate();
   const [islogin, setislogin] = useState(false);
+  const setlogin = useContext(loginContext);
+  if (setlogin.loginstate === true) {
+    setislogin(true);
+  }
   useEffect(() => {
     if (!islogin) {
       navigate("/Login");
       console.log("login handler");
     }
-  }, [navigate, islogin]);
+  }, [navigate, setlogin, islogin]);
 
   return (
     <>
@@ -52,6 +57,10 @@ const Rout = createBrowserRouter([
   {
     path: "/Search",
     element: <Search />,
+  },
+  {
+    path: "/Simmer",
+    element: <Simmer />,
   },
 ]);
 //console.log(typeof Rout)
