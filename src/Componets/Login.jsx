@@ -2,19 +2,23 @@ import { useState, useEffect } from "react";
 import Result from "./Result";
 import Search from "./Search";
 import axios from "axios";
-import { Link, useNavigate, Route } from "react-router-dom";
+import { Link, useNavigate, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import loginContext from "./loginContext";
+import { useDispatch, useSelector } from "react-redux";
+import store from "./store";
 export var setlog = false;
 const Login = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState(" ");
   const nave = useNavigate();
-  const serlogin = useContext(loginContext);
-  const [val, setval] = useState(true);
-  useEffect(() => {
-    setval(true);
-  }, [username, password]);
+  const [val, setval] = useState(false);
+  const dispach = useDispatch();
+  const Loginstate = useSelector((state) => {
+    return state.isLogin;
+  });
+
+  useEffect(() => {}, [username, password]);
   const login = async () => {
     try {
       const response = await axios.post("http://localhost:3005/api/login", {
@@ -25,16 +29,26 @@ const Login = () => {
       const stat = typeof response.status;
       console.log(stat);
       if (response.status !== 200) {
-        setval(false);
+        console.log("true");
       } else {
-        serlogin.loginstate = true;
+        setval(true);
+        dispach({ type: "SET_LOGIN", payload: val });
         console.log("Result is", result);
       }
     } catch (err) {
-      setval(false);
+      //  setlog.setLoginState(val);
       console.log(err);
     }
   };
+  useEffect(() => {
+    if (!Loginstate) {
+      nave("/Login");
+      console.log("login handler");
+    } else {
+      nave("/");
+      console.log("Loging successfull");
+    }
+  }, [Loginstate, val]);
 
   return (
     <div className="w-full h-screen bg-gradient-to-t flex justify-center items-center from-cyan-900 to-sky-200 ">
