@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 
-const loginreduser = (state = { isLogin: true }, action) => {
+const loginreduser = (state = { isLogin: false }, action) => {
   switch (action.type) {
     case "SET_LOGIN":
       return { ...state, isLogin: true };
