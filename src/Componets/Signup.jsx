@@ -1,27 +1,32 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { BackendUrl } from "../Constants";
 
 const Signup = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [email, setemail] = useState("");
-  const [statuscheck, setstatuscheck] = useState(false);
+  const [statuscheck, setstatuscheck] = useState(true);
 
   const SignUp = async () => {
+    if (username.length < 2 || password.length < 2 || email.length < 2) {
+      alert("please fill details properly");
+    }
     try {
-      const response = axios.post("http://localhost:3005/api/SignUp", {
+      const response =await  axios.post(`${BackendUrl}/api/signup`, {
         email,
         username,
         password,
       });
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
   };
   const usernamecheck = async () => {
     try {
-      const response = await axios.get("http://localhost:3005/api/SignUp", {
+      const response = await axios.get(`${BackendUrl}/api/SignUp`, {
         username,
       });
 
@@ -45,7 +50,7 @@ const Signup = () => {
               type="text"
               placeholder="Email"
               onChange={(e) => {
-                setusername(e.target.value);
+                setemail(e.target.value);
               }}
             />
             <h2 className="mt-2">Username: </h2>
@@ -62,7 +67,7 @@ const Signup = () => {
                 check?
               </h3>
             ) : (
-              <h3 className="cursor-pointer">Username is Not available</h3>
+              <h3 className="text-red-700 ">Username is Not available</h3>
             )}
             <h2 className="mt-5">Password:</h2>
             <input

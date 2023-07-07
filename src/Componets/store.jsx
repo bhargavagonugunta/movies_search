@@ -11,6 +11,6 @@ const loginreduser = (state = { isLogin: false }, action) => {
   }
 };
 
-const store =createStore(loginreduser);
+const store = createStore(loginreduser);
 
 export default store;
