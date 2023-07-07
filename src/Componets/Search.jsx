@@ -3,6 +3,9 @@ import Result from "./Result";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { BackendUrl } from "../Constants";
+import { saveAs } from "file-saver";
+import { decodeFromBase64 } from "pdf-lib";
+
 const Search = () => {
   const [search, setsearch] = useState("");
   const [results, setresults] = useState([]);
@@ -28,15 +31,25 @@ const Search = () => {
       .post(`${BackendUrl}/upload`, formData)
       .then((response) => {
         console.log(response.data);
-        // Handle successful response
       })
       .catch((error) => {
         console.error(error);
-        // Handle error
       });
   };
+
   const filefetch = async () => {
-    axios.get(`${BackendUrl}/file`).then((response) => {});
+    const respon = await axios.post(`${BackendUrl}/download`, {
+      search,
+    });
+
+    const decodedData = Uint8Array.from(atob(respon.data), (c) =>
+      c.charCodeAt(0)
+    );
+    const pdfBlob = new Blob([decodedData], { type: "application/pdf" });
+    const fileURL = URL.createObjectURL(pdfBlob);
+    window.open(fileURL);
+    console.log(pdfBlob);
+    console.log("link click");
   };
   return (
     <>

@@ -7,6 +7,7 @@ import { useContext } from "react";
 import loginContext from "./loginContext";
 import { useDispatch, useSelector } from "react-redux";
 import store from "./store";
+import { BackendUrl } from "../Constants";
 export var setlog = false;
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
       setcheck(true);
     } else {
       try {
-        const response = await axios.post("http://localhost:3005/api/login", {
+        const response = await axios.post(`${BackendUrl}/api/login`, {
           username,
           password,
         });
