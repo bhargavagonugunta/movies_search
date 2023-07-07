@@ -8,47 +8,45 @@ import loginContext from "./loginContext";
 import { useDispatch, useSelector } from "react-redux";
 import store from "./store";
 export var setlog = false;
+
 const Login = () => {
   const [username, setusername] = useState("");
-  const [password, setpassword] = useState(" ");
-  const nave = useNavigate();
-  const [val, setval] = useState(false);
+  const [password, setpassword] = useState("");
+  const [val, setval] = useState(true);
+  const [ischeck, setischeck] = useState(false);
+  const [check, setcheck] = useState(false);
+  const navigate = useNavigate();
   const dispach = useDispatch();
-  const Loginstate = useSelector((state) => {
-    return state.isLogin;
-  });
 
-  useEffect(() => {}, [username, password]);
   const login = async () => {
-    try {
-      const response = await axios.post("http://localhost:3005/api/login", {
-        username,
-        password,
-      });
-      const result = await response.data;
-      const stat = typeof response.status;
-      console.log(stat);
-      if (response.status !== 200) {
-        console.log("true");
-      } else {
-        setval(true);
-        dispach({ type: "SET_LOGIN", payload: val });
-        console.log("Result is", result);
+    if (username.length < 2 || password.length < 2) {
+      setval(false);
+    } else if (!ischeck) {
+      setcheck(true);
+    } else {
+      try {
+        const response = await axios.post("http://localhost:3005/api/login", {
+          username,
+          password,
+        });
+        const result = await response.data;
+        const stat = typeof response.status;
+        console.log(stat);
+        if (response.status !== 200) {
+          alert("invali Username Or password");
+        } else {
+          setval(true);
+          dispach({ type: "SET_LOGIN" });
+          navigate("/");
+        }
+      } catch (err) {
+        setusername("");
+        setpassword("");
+        alert(err.response.data);
+        console.log(err);
       }
-    } catch (err) {
-      //  setlog.setLoginState(val);
-      console.log(err);
     }
   };
-  useEffect(() => {
-    if (!Loginstate) {
-      nave("/Login");
-      console.log("login handler");
-    } else {
-      nave("/");
-      console.log("Loging successfull");
-    }
-  }, [Loginstate, val]);
 
   return (
     <div className="w-full h-screen bg-gradient-to-t flex justify-center items-center from-cyan-900 to-sky-200 ">
@@ -61,6 +59,7 @@ const Login = () => {
               val === false ? "border-red-500" : " "
             }`}
             type="text"
+            value={username}
             placeholder="Username"
             onChange={(e) => {
               setusername(e.target.value);
@@ -74,6 +73,7 @@ const Login = () => {
             }`}
             type="password"
             placeholder="Password"
+            value={password}
             onChange={(e) => {
               setpassword(e.target.value);
             }}
@@ -81,11 +81,18 @@ const Login = () => {
           <br />
           <input
             id="draft"
-            className="peer/draft mt-[20px] ml-6 "
+            className={`peer/draft mt-[20px] ml-6 ${
+              ischeck ? "bg-red-700" : "bg-black"
+            } `}
             type="checkbox"
             name="status"
+            onChange={() => (!ischeck ? setischeck(true) : setischeck(false))}
           />
-          <label className="peer-checked/draft:text-sky-500">
+          <label
+            className={`peer-checked/draft:text-sky-500 ${
+              check ? "text-red-700" : "text-black"
+            }`}
+          >
             Tearms and Conditions
           </label>
           <br />{" "}
